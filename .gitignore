@@ -1,3 +1,7 @@
+# GPT 5.2 prompt for creation:
+# "I create a monorepo with multiple subfolders with python projects I want
+# to ignore all cache folders and .env and vs code & macos system related
+# files and folder"
 # --------------------
 # Python
 # --------------------
