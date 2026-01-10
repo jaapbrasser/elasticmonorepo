@@ -94,6 +94,16 @@ def reindex():
     print(f'Index with {len(response["items"])} documents created '
           f'in {response["took"]} milliseconds.')
 
+@app.cli.command()
+def deploy_elser():
+    """Deploy the ELSER v2 model to Elasticsearch."""
+    try:
+        es.deploy_elser()
+    except Exception as exc:
+        print(f'Error: {exc}')
+    else:
+        print(f'ELSER model deployed.')
+
 def extract_filters(query):
     filters = []
 

@@ -25,7 +25,10 @@ class Search:
             'properties': {
                 'embedding': {
                     'type': 'dense_vector',
-                }
+                },
+                'elser_embedding': {
+                    'type': 'sparse_vector',
+                },
             }
         })
 
@@ -59,3 +62,38 @@ class Search:
 
     def retrieve_document(self, id):
         return self.es.get(index='my_documents', id=id)
+
+    def deploy_elser(self):
+        # download ELSER v2
+        self.es.ml.put_trained_model(model_id='.elser_model_2',
+                                     input={'field_names': ['text_field']})
+        
+        # wait until ready
+        while True:
+            status = self.es.ml.get_trained_models(model_id='.elser_model_2',
+                                                   include='definition_status')
+            if status['trained_model_configs'][0]['fully_defined']:
+                # model is ready
+                break
+            time.sleep(1)
+
+        # deploy the model
+        self.es.ml.start_trained_model_deployment(model_id='.elser_model_2')
+
+        # define a pipeline
+        self.es.ingest.put_pipeline(
+            id='elser-ingest-pipeline',
+            processors=[
+                {
+                    'inference': {
+                        'model_id': '.elser_model_2',
+                        'input_output': [
+                            {
+                                'input_field': 'summary',
+                                'output_field': 'elser_embedding',
+                            }
+                        ]
+                    }
+                }
+            ]
+        )
