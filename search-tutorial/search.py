@@ -58,7 +58,15 @@ class Search:
         return self.insert_documents(documents)
 
     def search(self, **query_args):
-        return self.es.search(index='my_documents', **query_args)
+        # sub_searches is not currently supported in the client, so we send
+        # search requests using the body argument
+        if 'from_' in query_args:
+            query_args['from'] = query_args['from_']
+            del query_args['from_']
+        return self.es.search(
+            index='my_documents',
+            body=json.dumps(query_args),
+        )
 
     def retrieve_document(self, id):
         return self.es.get(index='my_documents', id=id)
