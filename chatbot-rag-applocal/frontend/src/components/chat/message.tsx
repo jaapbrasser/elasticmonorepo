@@ -3,7 +3,7 @@ import { ChatMessageType, SourceType } from 'types'
 import { Loader } from 'components/loader'
 import { Sources } from 'components/chat/sources'
 import { ReactComponent as UserLogo } from 'images/user.svg'
-import { ReactComponent as ElasticLogo } from 'images/elastic_logo.svg'
+import { ReactComponent as LocalLLMIcon } from 'images/local_llm_icon.svg'
 
 type ChatMessageProps = Omit<ChatMessageType, 'id'> & {
   onSourceClick: (source: string) => void
@@ -16,12 +16,12 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
   onSourceClick,
 }) => {
   const messageIcon = isHuman ? (
-    <span className="self-end p-2 rounded-md border border-zind-200 bg-white">
+    <span className="self-end p-2 rounded-lg border border-white/30 bg-white/20 backdrop-blur-sm">
       <UserLogo width={24} height={24} />
     </span>
   ) : (
-    <span className="self-end p-2 rounded-md bg-blue-50 shadow">
-      <ElasticLogo width={24} height={24} />
+    <span className="self-end p-2 rounded-lg bg-blue-500/20 backdrop-blur-sm shadow-lg border border-white/20">
+      <LocalLLMIcon width={24} height={24} />
     </span>
   )
 
@@ -31,10 +31,10 @@ export const ChatMessage: React.FC<ChatMessageProps> = ({
         {messageIcon}
 
         <div
-          className={`w-96 p-4 rounded-md ${
+          className={`w-96 p-4 rounded-xl backdrop-blur-md shadow-2xl border border-white/20 ${
             isHuman
-              ? 'rounded-br-none text-white bg-blue-500 -order-1'
-              : 'bg-white shadow border-2 border-blue-100 rounded-bl-none text-zinc-700'
+              ? 'rounded-br-none text-white bg-blue-500/80 -order-1'
+              : 'bg-white/10 rounded-bl-none text-slate-200'
           }`}
         >
           <span

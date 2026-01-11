@@ -24,7 +24,7 @@ export default function SearchInput({ onSearch, value, appStatus }) {
       <div className="relative mt-1 flex w-full items-center h-14 gap-2">
         <input
           type="search"
-          className={`hover:border-blue-500 outline-none focus-visible:border-blue-600 w-full h-14 rounded-md border-2 border-zinc-300 px-3 py-2.5 pl-12 text-base font-medium placeholder-gray-400 ${
+          className={`hover:border-blue-400 outline-none focus-visible:border-blue-400 w-full h-14 rounded-xl border-2 border-white/30 bg-white/10 backdrop-blur-md px-3 py-2.5 pl-12 text-base font-medium placeholder-slate-400 text-white ${
             appStatus === AppStatus.Idle ? 'pr-20' : 'pr-40'
           }`}
           value={query}
@@ -36,7 +36,7 @@ export default function SearchInput({ onSearch, value, appStatus }) {
         </span>
         {appStatus === AppStatus.Idle ? (
           <button
-            className="hover:bg-blue disabled:bg-blue-400 px-4 py-2 bg-blue-500 rounded flex items-center absolute right-2 z-10"
+            className="hover:bg-blue-400 disabled:bg-blue-300/50 px-4 py-2 bg-blue-500/80 backdrop-blur-sm rounded-lg flex items-center absolute right-2 z-10 border border-white/20"
             type="submit"
             disabled={!query.length}
           >
@@ -44,7 +44,7 @@ export default function SearchInput({ onSearch, value, appStatus }) {
           </button>
         ) : (
           <button
-            className="hover:bg-blue-400 hover:text-blue-100 px-4 py-2 bg-blue-100 rounded flex justify-center items-center text-blue-400 font-bold absolute right-2 z-10"
+            className="hover:bg-blue-400/80 hover:text-white px-4 py-2 bg-white/20 backdrop-blur-sm rounded-lg flex justify-center items-center text-blue-300 font-bold absolute right-2 z-10 border border-white/20"
             type="submit"
           >
             <span className="mr-2">

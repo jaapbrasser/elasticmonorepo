@@ -22,7 +22,7 @@ export const Chat: React.FC<ChatProps> = ({
   onAbortRequest,
   onSourceClick,
 }) => (
-  <div className="rounded-md shadow bg-white mt-6 p-6 border border-light-fog mb-8">
+  <div className="rounded-xl shadow-2xl bg-white/10 backdrop-blur-md mt-6 p-6 border border-white/20 mb-8">
     <div className="mb-4">
       <AnswerMessage
         text={summary?.content}

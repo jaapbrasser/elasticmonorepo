@@ -11,7 +11,8 @@ import { Header } from 'components/header'
 import { Chat } from 'components/chat/chat'
 import SearchInput from 'components/search_input'
 import { ReactComponent as ChatIcon } from 'images/chat_icon.svg'
-import { ReactComponent as ElasticLogo } from 'images/elastic_logo.svg'
+import { ReactComponent as LocalLLMIcon } from 'images/local_llm_icon.svg'
+import Frog from 'components/frog'
 import { SearchResults } from './components/search_results'
 
 const App = () => {
@@ -67,14 +68,14 @@ const App = () => {
 
         {status === AppStatus.Idle ? (
           <div className="mx-auto my-6">
-            <h2 className="text-zinc-400 text-sm font-medium mb-3  inline-flex items-center gap-2">
+            <h2 className="text-slate-300 text-sm font-medium mb-3 inline-flex items-center gap-2">
               <ChatIcon /> Common questions
             </h2>
             <div className="flex flex-col space-y-4">
               {suggestedQueries.map((query) => (
                 <button
                   key={query}
-                  className="hover:-translate-y-1 hover:shadow-lg hover:bg-zinc-300 transition-transform h-12 px-4 py-2 bg-zinc-200 rounded-md shadow flex items-center text-zinc-700"
+                  className="hover:-translate-y-1 hover:shadow-2xl hover:bg-white/20 transition-all duration-300 h-12 px-4 py-2 bg-white/10 backdrop-blur-md rounded-xl shadow-lg flex items-center text-white border border-white/20"
                   onClick={(e) => {
                     e.preventDefault()
                     setSearchQuery(query)
@@ -105,9 +106,9 @@ const App = () => {
                 />
               </div>
             ) : (
-              <div className="h-36 p-6 bg-white rounded-md shadow flex flex-col justify-start items-center gap-4 mt-6">
-                <ElasticLogo className="w-16 h-16" />
-                <p className="text-center text-zinc-400 text-sm ">
+              <div className="h-36 p-6 bg-white/10 backdrop-blur-md rounded-xl shadow-2xl flex flex-col justify-start items-center gap-4 mt-6 border border-white/20">
+                <LocalLLMIcon className="w-16 h-16" />
+                <p className="text-center text-slate-300 text-sm">
                   Looking that up for you...
                 </p>
               </div>
@@ -115,6 +116,7 @@ const App = () => {
           </>
         )}
       </div>
+      <Frog />
     </>
   )
 }
